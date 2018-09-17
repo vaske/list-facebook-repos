@@ -11,6 +11,8 @@ import {
     FETCH_CONTRIBUTORS
 } from 'core/constants/repository';
 
+import { GITHUB_API_URL } from 'core/constants/general';
+
 import {
     fetchReposSuccess,
     fetchReposFailed,
@@ -24,7 +26,7 @@ export const fetchRepos = action$ =>
     action$.pipe(
         ofType(FETCH_REPOS),
         mergeMap(action =>
-            get(`https://api.github.com/users/${action.payload.username}/repos`).pipe(
+            get(`${GITHUB_API_URL}/users/${action.payload.username}/repos`).pipe(
                 expand(({ next }) => next ? get(next) : empty()),
                 map(repos => fetchReposSuccess(repos)),
                 retry(2),
@@ -38,7 +40,7 @@ export const fetchRepository = action$ =>
     action$.pipe(
         ofType(FETCH_REPOSITORY),
         mergeMap(action =>
-            ajax(`https://api.github.com/repos/${action.payload.username}/${action.payload.repository}`).pipe(
+            ajax(`${GITHUB_API_URL}/repos/${action.payload.username}/${action.payload.repository}`).pipe(
                 map(repository => fetchRepositorySuccess(repository)),
                 retry(2),
                 mergeMap(action => of(action, { type: FETCH_CONTRIBUTORS, payload: action.payload.repository })),
