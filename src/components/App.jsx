@@ -30,17 +30,19 @@ class App extends Component {
     }
 
     render() {
+        const { selectedRepo } = this.state;
+        const { repos, loadingContributors, selectedRepository, contributors } = this.props;
         return (
             <section className="section">
                 <div className="container">
-                    <Header repos={ this.props.repos }/>
+                    <Header repos={ repos }/>
                     <div className="columns is-multiline is-mobile">
-                        <Sidebar repos={ this.props.repos } selectedRepo={ this.state.selectedRepo } loadRepo={ this.loadRepo } />
-                        {this.state.selectedRepo &&
+                        <Sidebar repos={ this.props.repos } selectedRepo={ selectedRepo } loadRepo={ this.loadRepo } />
+                        {selectedRepo &&
                             <Main
-                                loadingContributors={ this.props.loadingContributors }
-                                selectedRepository={ this.props.selectedRepository }
-                                contributors={ this.props.contributors }
+                                loadingContributors={ loadingContributors }
+                                selectedRepository={ selectedRepository }
+                                contributors={ contributors }
                             />
                         }
                     </div>
