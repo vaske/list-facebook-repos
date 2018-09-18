@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import PropTypes from 'prop-types';
 
 const Project = ({ 
@@ -19,7 +20,7 @@ const Project = ({
                                 <span className="tag is-danger">Private</span> :
                                 <span className="tag is-success">Public</span>
                             }<br />
-                        Updated: <time dateTime={ updated_at }>{ updated_at }</time><br />
+                        Updated: <time dateTime={ updated_at }>{ moment(updated_at).format('YYYY MM DD h:mm:ss a') }</time><br />
                         <a className="button is-link" href={ html_url } target="_blank">View Project on Github</a>
                     </div>
                 </div>
