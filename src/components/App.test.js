@@ -21,7 +21,7 @@ const initialState = {
 const mockStore = configureMockStore();
 const store = mockStore(initialState);
 
-describe("Test App {age Component", () => {
+describe("Test App Page Component", () => {
     let wrapper;
 
     beforeEach(() => {
